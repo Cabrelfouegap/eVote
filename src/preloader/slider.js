@@ -3,6 +3,7 @@ import { SafeAreaView, StyleSheet, View, Text, Image, Button } from 'react-nativ
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { LinearGradient } from 'expo-linear-gradient';
 import { deg } from 'react-native-linear-gradient-degree';//pour le degrader de font
+import Navigation from '../Navigation/Navigation';
 
 const Slider = () => {
   const [showRealApp, setShowRealApp] = useState(false);
@@ -42,21 +43,7 @@ const Slider = () => {
   return (
     <>
       {showRealApp ? (
-        <SafeAreaView style={styles.container}>
-          <View style={styles.container}>
-            <Text style={styles.titleStyle}>
-              React Native App Intro Slider using AppIntroSlider
-            </Text>
-            <Text style={styles.paragraphStyle}>
-              This will be your screen when you click Skip from any slide or
-              Done button at last
-            </Text>
-            <Button
-              title="Show Intro Slider again"
-              onPress={() => setShowRealApp(false)}
-            />
-          </View>
-        </SafeAreaView>
+           <Navigation/>
       ) : (
         <AppIntroSlider
           data={slides}

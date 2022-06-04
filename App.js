@@ -1,11 +1,7 @@
 import  { React, Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import Login from './src/Login';
 import Slider from './src/preloader/Slider';
-import Navigation from './src/Navigation/Navigation'
-import HomeScreen from './src/screens/HomeScreen';
-import VoteScreen from './src/screens/VoteScreen';
-import ResultScreen from './src/screens/ResultScreen';
+
 
 
 class App extends Component {

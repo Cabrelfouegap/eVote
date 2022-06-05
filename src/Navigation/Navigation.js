@@ -8,6 +8,8 @@ import ProfilScreen from '../screens/ProfilScreen';
 import ResultScreen from '../screens/ResultScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../login';
+import {Ionicons} from '@expo/vector-icons';
+import {EvilIcons} from '@expo/vector-icons'
 
 
 
@@ -28,20 +30,17 @@ const Navigation = () => {
             <VoteTabNavigator.Screen name="Accueil" component={HomeScreen} 
                 options={{
                     headerShown: false,
-                    tabBarIcon: () => (<Image source={require("../img/Home.png")} 
-                    style={styles.icon} />)
+                    tabBarIcon: () => (<Ionicons name={'ios-home'} size={30} color={'#2B72B4'}/>)
                 }}
             />
             <VoteTabNavigator.Screen name="Resultat" component={ResultScreen} 
                 options={{
-                    tabBarIcon: () => (<Image source={require("../img/Resultat.png")} 
-                    style={styles.icon} />)
+                    tabBarIcon: () => (<Ionicons name={'stats-chart'} size={30}  />)
                 }}
             />
             <VoteTabNavigator.Screen name="Profil" component={ProfilScreen} 
                 options={{
-                    tabBarIcon: () => (<Image source={require("../img/Profile.png")} 
-                    style={styles.icon} />)
+                    tabBarIcon: () => (<EvilIcons name={'user'} size={40} />)
                 }}
                 style={styles.screenText}
             />

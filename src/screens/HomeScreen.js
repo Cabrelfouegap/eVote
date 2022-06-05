@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, ScrollView, TouchableOpacity} from 'react-native';
+import { Text, View, StyleSheet, Image, ScrollView, TouchableOpacity,  ImageBackground} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import VoteScreen from './VoteScreen';
 
@@ -8,13 +8,14 @@ import VoteScreen from './VoteScreen';
 
 const Home = ({ navigation }) => {
   return (
-    <ScrollView style={styles.container}>
-      <Text style= {styles.welcome}>BIENVENUE AUX ELECTIONS DE L’AE</Text>
-      <Text style= {styles.list}>Listes représentées aux elections{'\n'}Listes représentées aux elections{'\n'}Listes représentées aux elections</Text>
-      <TouchableOpacity style = {styles.button} onPress={() => navigation.navigate('Vote')}>
-        <Text style={{color: 'white'}}>Voter ?</Text>
-      </TouchableOpacity>
-    </ScrollView>
+    <View style={styles.container}>
+      <ImageBackground source={require('../img/HomeScreenBackground.jpg')} resizeMode="cover" style={styles.image}>
+        <Text style= {styles.welcome}>BIENVENUE AUX ELECTIONS DE L’AE</Text>
+        <TouchableOpacity style = {styles.button} onPress={() => navigation.navigate('Vote')}>
+          <Text style={{color: 'white' }}>Voter ?</Text>
+        </TouchableOpacity>     
+      </ImageBackground>
+    </View>
   );
 }
 
@@ -32,7 +33,7 @@ const HomeScreen = () => {
 
 let styles = StyleSheet.create({
     container: {
-        flex: 1,   
+      flex: 1, 
     },
     welcome: {
       fontWeight: '500',
@@ -41,6 +42,13 @@ let styles = StyleSheet.create({
       textAlign: 'center',
       marginBottom: 30,
       marginTop: 40,
+
+      color: "white",
+      fontSize: 42,
+      lineHeight: 84,
+      fontWeight: "bold",
+      textAlign: "center",
+      backgroundColor: "rgba(0,0,0,0.3)"
     },
     list: {
       fontWeight: '400',
@@ -57,7 +65,7 @@ let styles = StyleSheet.create({
       justifyContent: 'center',
       margin: 10,
       borderRadius: 20,
-      alignSelf: 'center'
+      alignSelf: 'center',
     },
     itemCard: {
       flex: 1,
@@ -65,8 +73,8 @@ let styles = StyleSheet.create({
     },
     button: {
       backgroundColor: 'rgba(80, 191, 105, 1)',
-      width: 78,
-      height: 29,
+      width: 100,
+      height: 48,
       borderRadius: 4,
       textAlign: 'center',
       justifyContent: 'center',
@@ -74,6 +82,12 @@ let styles = StyleSheet.create({
       color: '#000',
       marginBottom: '30%',
       marginLeft: '68%',
-    }
+    },
+
+    image: {
+      flex: 1,
+      justifyContent: "center"
+    },
+    
 });
 export default HomeScreen;

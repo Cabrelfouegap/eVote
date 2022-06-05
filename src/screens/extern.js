@@ -23,15 +23,12 @@ const CardListe = ({ id, AllListe, cleListe, voter}) =>{
     }
     return(
         
-       <TouchableOpacity  style={styles.container} onPress={voter}>
+        <TouchableOpacity  style={styles.container} onPress={voter}>
         
-            <View >
-            <Text >Nom de la liste: {AllListe.liste}</Text>
-            <Text style={styles.commentaire}>Couleur: {AllListe.couleur}</Text>
-            </View>
-                
-             
-           
+            <View style={{backgroundColor: AllListe.couleur}}>
+                <Text style={styles.commentaire}>{/*Nom de la liste:*/} {AllListe.liste}</Text>
+                {/* <Text style={styles.commentaire}>Couleur: {AllListe.couleur}</Text> */}
+            </View>     
         </TouchableOpacity> 
     )
     
@@ -42,13 +39,13 @@ const styles = StyleSheet.create({
     container: {
         flexDirection:"row", 
         padding: 15, 
-        backgroundColor: "white", 
+        // backgroundColor: "white", 
         borderRadius: 5, 
         marginBottom: 20, 
         shadowColor: "#000", 
         shadowOffset:{
         width: 0 , 
-        height: 2
+        height: 2 
         }, 
         shadowOpacity: 0.25, 
         shadowRadius: 3.84, 
@@ -60,14 +57,13 @@ const styles = StyleSheet.create({
     }, 
     commentaire: {
       fontSize: 15, 
-      color: "gray"
+      color: "rgba(0,0,0,0.6)",
     }, 
     icon: {
         flexDirection:"row" ,
         flex: 1,
         justifyContent: "flex-end", 
         alignItems: "center"
-
     }
 
 })

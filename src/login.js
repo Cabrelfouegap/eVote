@@ -1,29 +1,91 @@
 import  {React, Component} from 'react';
-import { TextInput, useState, View, StyleSheet, SafeAreaView, Text, Button, TouchableOpacity } from 'react-native';
+import { TextInput, useState, View, StyleSheet, SafeAreaView, Text, Button, TouchableOpacity,ScrollView } from 'react-native';
+import Firebase from './firebase';
+import InputListe from './inputListe';
 
 class Login extends Component {
+  constructor(props) 
+    {
+        super(props)
+        this.state = {
+            utilisateur: {},  
+            cleutilisateur: [],
+            matricule: '',
+            password: '',
+            AllUsers: [], 
+            recuperation: "", 
+            id: ""
+            
+        }
+    }
+
+  onChangeText = (nomState, value) => {
+    this.setState({
+        [nomState]: value
+    })
+}
+
+componentDidMount() {
+  Firebase.database()
+  .ref("utilisateurs")
+  .once('value', (querySnapShot) => {
+      let data = querySnapShot.val() ? querySnapShot.val() : {};
+      let AllUsers = {...data};
+
+      this.setState({
+          utilisateur:AllUsers, 
+          cleutilisateur: Object.keys(AllUsers)
+      })
+  })
+}
+
+connection = (recup, recuperation, id) => {
+  const {cleutilisateur, AllUsers, utilisateur} = this.state
+  cleutilisateur.map((key) =>(
+  this.state.matricule == utilisateur[key].matricule && this.state.password == utilisateur[key].password ? ( 
+     recuperation = key, 
+     this.props.navigation.navigate("Home")      
+  ): (
+      recup = "message" 
+      
+      )
+  
+  )) 
+}
+
     render() {  
         return (
+          <ScrollView>
             <SafeAreaView style= {styles.container}>
             <View style={styles.header}></View>
             <View style= {styles.login}>
                 <Text style={styles.text}>connexion</Text>
                 <View style={styles.login2}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Matricule"
-                    placeholderTextColor= '#9C9B9B'
-                />
-                <TextInput
-                    style={[styles.input, {marginBottom: '10%', marginTop: 25}]}
-                    placeholder="Password"
-                />
-                <TouchableOpacity style = {styles.button}>
+                
+               <InputListe label="matricule" placeholder="matricule"
+               placeholderTextColor='#9C9B9B' 
+               onChangeText={this.onChangeText} 
+               nomState = "matricule"
+               value = {this.state.matricule}
+               />
+               
+                <Text></Text>
+                <InputListe style={styles.input}  label="password" placeholder="password"
+               placeholderTextColor='#9C9B9B' 
+               onChangeText={this.onChangeText} 
+               nomState = "password"
+               value = {this.state.password}
+               />
+               </View>
+               <Text></Text>
+               <Text></Text>
+                <TouchableOpacity style = {styles.button} onPress={()=>this.connection()}>
                     <Text style={{color: 'white'}}>Connexion</Text>
                 </TouchableOpacity>
                 </View>
-            </View>
+            
             </SafeAreaView>
+            </ScrollView>
         ) 
     }
 }
@@ -50,6 +112,7 @@ let styles= StyleSheet.create({
       flex: 6,
       justifyContent: 'center',
       alignItems: 'center',
+      
     },
     text: {
       flex:1,
@@ -57,7 +120,9 @@ let styles= StyleSheet.create({
       fontSize: 32,
       lineHeight: 32,
       textAlign: 'center',
-      marginTop: '20%'
+      marginTop: '20%', 
+      marginBottom:"0%", 
+      color:"#5f9ea0"
     },
     input: {
       backgroundColor: 'rgba(223, 223, 223, 1)',
@@ -66,7 +131,8 @@ let styles= StyleSheet.create({
       lineHeight: 30,
       borderRadius: 12,
       justifyContent: 'center',
-      textAlign: 'center'
+      textAlign: 'center',
+      marginTop:"20%"
     },
     button: {
       backgroundColor: 'rgba(80, 191, 105, 1)',

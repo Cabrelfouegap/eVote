@@ -3,24 +3,14 @@ import { Text, View, StyleSheet, Image, ScrollView, TouchableOpacity} from 'reac
 import { createStackNavigator } from '@react-navigation/stack';
 import VoteScreen from './VoteScreen';
 
+
 //HomeScreen
+
 const Home = ({ navigation }) => {
   return (
     <ScrollView style={styles.container}>
       <Text style= {styles.welcome}>BIENVENUE AUX ELECTIONS DE L’AE</Text>
-      <Text style= {styles.list}>Listes représentées aux elections</Text>
-      <View style={[styles.card, {backgroundColor: 'rgba(80, 191, 105, 1)'}]}>
-        <View style={[styles.itemCard, {borderRadius: 9, marginLeft: 15}]}><Image source={require('../img/Presi1.png')}/></View>
-        <View style={styles.itemCard}><Text style={{color: '#fff',}}>Liste Tan</Text></View>
-      </View>
-      <View style={[styles.card, {backgroundColor: 'rgba(104, 187, 227, 1)'}]}>
-        <View style={[styles.itemCard, {borderRadius: 9, marginLeft: 15}]}><Image source={require('../img/Presi2.png')}/></View>
-        <View style={styles.itemCard}><Text style={{color: '#fff',}}>Liste Tan</Text></View>
-      </View>
-      <View style={[styles.card, {backgroundColor: 'rgba(242, 231, 133, 1)'}]}>
-        <View style={[styles.itemCard, {borderRadius: 9, marginLeft: 15}]}><Image source={require('../img/Presi3.png')}/></View>
-        <View style={styles.itemCard}><Text style={{color: '#fff',}}>Liste Tan</Text></View>
-      </View>
+      <Text style= {styles.list}>Listes représentées aux elections{'\n'}Listes représentées aux elections{'\n'}Listes représentées aux elections</Text>
       <TouchableOpacity style = {styles.button} onPress={() => navigation.navigate('Vote')}>
         <Text style={{color: 'white'}}>Voter ?</Text>
       </TouchableOpacity>

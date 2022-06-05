@@ -2,9 +2,9 @@ import React, {Component} from "react";
 import {View, Text, StyleSheet, Button, TextInput, TouchableOpacity, ScrollView} from "react-native";
 import "firebase/compat/database"; 
 import Firebase from "../firebase";
-import CardListe from "./extern";
+import CardListe2 from "./extern2";
 
-export default class VoteScreen extends Component{
+export default class ListeView extends Component{
     constructor(props)
     {
         super(props)
@@ -47,12 +47,13 @@ render()
                             cleListe.map((key) => (
                                
                             <View >
-                            <TouchableOpacity style={{backgroundColor:liste[key].couleur}}>
-                           <CardListe  key={key} AllListe={liste[key]} id={key}
+                            <View style={{backgroundColor:liste[key].couleur}}>
+                           <CardListe2  key={key} AllListe={liste[key]} id={key}
                             />
-                            </TouchableOpacity>
                             </View>
-
+                            </View>
+                                
+                            
                             ))
                         ) : (
                             <Text>Aucune liste !</Text>          

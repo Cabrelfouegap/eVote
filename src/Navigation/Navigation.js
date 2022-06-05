@@ -6,12 +6,16 @@ import 'react-native-gesture-handler';
 import HomeScreen from '../screens/HomeScreen';
 import ProfilScreen from '../screens/ProfilScreen';
 import ResultScreen from '../screens/ResultScreen';
+import { createStackNavigator } from '@react-navigation/stack';
+import Login from '../login';
 
 
 
 const VoteTabNavigator = createBottomTabNavigator();
+const Stack = createStackNavigator();
 const Navigation = () => {
   return (
+
     <NavigationContainer
         screenOptions={({ route }) => ({
             tabBarShowLabel:true,
@@ -19,6 +23,7 @@ const Navigation = () => {
             tabBarInactiveBackgroundColor: '#9C9B9B',
         })}    
     >
+
         <VoteTabNavigator.Navigator style = {styles.container}>
             <VoteTabNavigator.Screen name="Accueil" component={HomeScreen} 
                 options={{

@@ -1,10 +1,9 @@
 import React, {Component} from "react";
 import {View, Text, StyleSheet, Button, TextInput, TouchableOpacity, ScrollView} from "react-native";
 import "firebase/compat/database"; 
-import Firebase from "../firebase";
-import CardListe from "./extern";
+import Firebase from "./firebase";
 
-export default class VoteScreen extends Component{
+export default class VoirListe extends Component{
     constructor(props)
     {
         super(props)
@@ -29,14 +28,15 @@ export default class VoteScreen extends Component{
             })
         })
     }
-        
+     
+   
 render() 
 {
     const {liste, cleListe, AllListe} = this.state
     return(
       <View style={styles.page}>
           <View style={styles.header}>
-                <Text style={styles.title}>Vos liste</Text>
+                <Text style={styles.title}>Vos information</Text>
           </View>
           <ScrollView>
           <View style={styles.listcontact} >
@@ -45,20 +45,78 @@ render()
                         {cleListe.length >0   ? (
                             
                             cleListe.map((key) => (
-                               
+                                liste[key].couleur=="Bleu" ? (
                             <View >
-                            <TouchableOpacity style={{backgroundColor:liste[key].couleur}}>
+                            <TouchableOpacity style={{backgroundColor:"blue"}}>
                            <CardListe  key={key} AllListe={liste[key]} id={key}
                             />
                             </TouchableOpacity>
                             </View>
-
+                                ) : (
+                                    <Text></Text>
+                                )
+                            
                             ))
                         ) : (
                             <Text>Aucune liste !</Text>          
                         )
                     }
-                     
+                      {cleListe.length >0   ? (
+
+cleListe.map((key) => (
+    liste[key].couleur=="Verte" ? (
+<View >
+<TouchableOpacity style={{backgroundColor:"green"}}>
+<CardListe  key={key} AllListe={liste[key]} id={key} />
+</TouchableOpacity>
+</View>
+    ) : (
+        <Text></Text>
+    )
+
+))
+) : (
+<Text>Aucune liste !</Text>          
+)
+}
+                     {cleListe.length >0   ? (
+
+cleListe.map((key) => (
+    liste[key].couleur=="Blanc" ? (
+<View >
+<TouchableOpacity >
+<CardListe  key={key} AllListe={liste[key]} id={key}
+/>
+</TouchableOpacity>
+</View>
+    ) : (
+        <Text></Text>
+    )
+
+))
+) : (
+<Text>Aucune liste !</Text>          
+)
+}
+{cleListe.length >0   ? (
+
+cleListe.map((key) => (
+    liste[key].couleur=="Noir" ? (
+<View >
+<TouchableOpacity style={{backgroundColor:"black"}}>
+<CardListe  key={key} AllListe={liste[key]} id={key}
+/>
+</TouchableOpacity>
+</View>
+    ) : (
+        <Text></Text>
+    )
+
+))
+) : (
+<Text>Aucune liste !</Text>          
+)
+}
  </View>
  </ScrollView>
           <View style={styles.listcontact}>

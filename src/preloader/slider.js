@@ -4,6 +4,7 @@ import AppIntroSlider from 'react-native-app-intro-slider';
 import { LinearGradient } from 'expo-linear-gradient';
 import { deg } from 'react-native-linear-gradient-degree';//pour le degrader de font
 import Navigation from '../Navigation/Navigation';
+import Login from '../login';
 
 const Slider = () => {
   const [showRealApp, setShowRealApp] = useState(false);
@@ -43,7 +44,7 @@ const Slider = () => {
   return (
     <>
       {showRealApp ? (
-           <Navigation/>
+           <Login/>
       ) : (
         <AppIntroSlider
           data={slides}

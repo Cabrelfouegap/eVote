@@ -6,13 +6,15 @@ import Slider from './src/preloader/Slider';
 import Navigation from './src/Navigation/Navigation'
 import HomeScreen from './src/screens/HomeScreen';
 import VoteScreen from './src/screens/VoteScreen';
+import LoginToNavigation from './src/screens/LoginToNavigation';
+
 
 
 class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Slider/>
+        <LoginToNavigation/>
       </View>
     );
   }

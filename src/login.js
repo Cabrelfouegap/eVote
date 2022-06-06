@@ -3,6 +3,8 @@ import { TextInput, useState, View, StyleSheet, SafeAreaView, Text, Button, Touc
 import Firebase from './firebase';
 import InputListe from './inputListe';
 
+
+
 class Login extends Component {
   constructor(props) 
     {
@@ -23,37 +25,42 @@ class Login extends Component {
     this.setState({
         [nomState]: value
     })
-}
+  }
 
-componentDidMount() {
-  Firebase.database()
-  .ref("utilisateurs")
-  .once('value', (querySnapShot) => {
-      let data = querySnapShot.val() ? querySnapShot.val() : {};
-      let AllUsers = {...data};
+  componentDidMount() {
+    Firebase.database()
+    .ref("utilisateurs")
+    .once('value', (querySnapShot) => {
+        let data = querySnapShot.val() ? querySnapShot.val() : {};
+        let AllUsers = {...data};
 
-      this.setState({
-          utilisateur:AllUsers, 
-          cleutilisateur: Object.keys(AllUsers)
-      })
-  })
-}
+        this.setState({
+            utilisateur:AllUsers, 
+            cleutilisateur: Object.keys(AllUsers)
+        })
+    })
+  }
 
-connection = (recup, recuperation, id) => {
+ connection = () => {
   const {cleutilisateur, AllUsers, utilisateur} = this.state
   cleutilisateur.map((key) =>(
-  this.state.matricule == utilisateur[key].matricule && this.state.password == utilisateur[key].password ? ( 
-     recuperation = key, 
-     this.props.navigation.navigate("Home")      
+  this.state.matricule == utilisateur[key].matricule && this.state.password == utilisateur[key].password ? (  
+    alert("connecter"), 
+    this.props.navigation.navigate("Navigation")       
+
   ): (
-      recup = "message" 
+      alert("gfghf")
       
       )
   
   )) 
+
+
 }
 
+
     render() {  
+
         return (
           <ScrollView>
             <SafeAreaView style= {styles.container}>
@@ -79,13 +86,13 @@ connection = (recup, recuperation, id) => {
                </View>
                <Text></Text>
                <Text></Text>
-                <TouchableOpacity style = {styles.button} onPress={()=>this.connection()}>
+                <TouchableOpacity style = {styles.button} onPress={() => this.connection()}>
                     <Text style={{color: 'white'}}>Connexion</Text>
                 </TouchableOpacity>
                 </View>
             
             </SafeAreaView>
-            </ScrollView>
+          </ScrollView>
         ) 
     }
 }

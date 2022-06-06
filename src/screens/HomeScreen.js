@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, Image, ScrollView, TouchableOpacity,  ImageBackground} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import VoteScreen from './VoteScreen';
+import { NavigationContainer } from '@react-navigation/native';
 
 
 //HomeScreen
@@ -24,10 +25,12 @@ const Home = ({ navigation }) => {
 const Stack = createStackNavigator();
 const HomeScreen = () => {
   return (
-    <Stack.Navigator>
-        <Stack.Screen name='Home' component={Home} />
+  
+      <Stack.Navigator>
+        <Stack.Screen name='Accueil' component={Home} />
         <Stack.Screen name='Vote' component={VoteScreen} />
-    </Stack.Navigator> 
+      </Stack.Navigator> 
+    
   );
 }
 

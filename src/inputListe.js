@@ -1,12 +1,13 @@
 import React from "react"; 
 import { StyleSheet, Text, View, TextInput } from "react-native";
 
-const InputListe = ({label, placeholder, onChangeText, nomState, value }) => {
+const InputListe = ({label, placeholder, onChangeText, nomState, value, keyboardType }) => {
     return(
     
     <TextInput style={styles.input} placeholder= {placeholder}
     value = {value}
     onChangeText = {(text) => onChangeText(nomState, text)}
+    keyboardType={keyboardType}
   />
      
      )

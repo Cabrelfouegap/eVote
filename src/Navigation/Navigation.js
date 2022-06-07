@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -10,12 +10,36 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../login';
 import {Ionicons} from '@expo/vector-icons';
 import {EvilIcons} from '@expo/vector-icons'
-
+import Firebase from '../firebase';
 
 
 const VoteTabNavigator = createBottomTabNavigator();
 const Stack = createStackNavigator();
-const Navigation = () => {
+export default class Navigation extends Component {
+    constructor(props)
+  {
+      super(props)
+      this.state = {
+          utilisateurs: {}
+
+      }
+  }
+  componentDidMount() {
+      Firebase.database()
+      .ref("utilisateurs/"+ this.props.route.params.id)
+      .once('value', (querySnapShot) => {
+          let data = querySnapShot.val() ? querySnapShot.val() : {};
+          let AllUsers = {...data};
+
+          this.setState({
+              utilisateurs:AllUsers, 
+          })
+      })
+  }
+
+    render()
+{
+const {utilisateurs} = this.state
   return (
         <VoteTabNavigator.Navigator style = {styles.container}
             screenOptions={({ route }) => ({
@@ -51,6 +75,7 @@ const Navigation = () => {
     
   );
 }
+}
 
 
 let styles = StyleSheet.create({
@@ -67,4 +92,3 @@ let styles = StyleSheet.create({
         color: '#fff'
     }
 });
-export default Navigation;

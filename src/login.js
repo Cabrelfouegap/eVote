@@ -41,16 +41,15 @@ class Login extends Component {
     })
   }
 
- connection = () => {
+ connection = (recuperation, recup) => {
   const {cleutilisateur, AllUsers, utilisateur} = this.state
   cleutilisateur.map((key) =>(
   this.state.matricule == utilisateur[key].matricule && this.state.password == utilisateur[key].password ? (  
-    alert("connecter"), 
-    this.props.navigation.navigate("Navigation")       
+    recuperation = key,
+    this.props.navigation.navigate("Navigation", {id:recuperation})       
 
   ): (
-      alert("gfghf")
-      
+        recup = "message"      
       )
   
   )) 
@@ -60,7 +59,7 @@ class Login extends Component {
 
 
     render() {  
-
+      const {recuperation, id} = this.state;
         return (
           <ScrollView>
             <SafeAreaView style= {styles.container}>
@@ -85,10 +84,14 @@ class Login extends Component {
                />
                </View>
                <Text></Text>
-               <Text></Text>
-                <TouchableOpacity style = {styles.button} onPress={() => this.connection()}>
+                <TouchableOpacity style = {styles.button}  key={recuperation}  onPress={() => this.connection()}>
                     <Text style={{color: 'white'}}>Connexion</Text>
                 </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate("confirm")} style = {styles.change}>
+                <Text style = {{color:"white"}} >mot de passe oublié?</Text>
+                </TouchableOpacity>
+                <Text></Text>
+               
                 </View>
             
             </SafeAreaView>
@@ -150,7 +153,31 @@ let styles= StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
       color: '#000',
-      marginBottom: '30%'
+      marginBottom: '20%'
+    }, 
+    change: 
+    {
+      backgroundColor: '#5f9ea0',
+      width: 211,
+      height: 37,
+      borderRadius: 30,
+      textAlign: 'center',
+      justifyContent: 'center',
+      alignItems: 'center',
+      color: '#000',
+    
+      
+    }, 
+    update:
+    {
+      backgroundColor: '#5f9ea0',
+      width: 250,
+      height: 37,
+      borderRadius: 30,
+      textAlign: 'center',
+      justifyContent: 'center',
+      alignItems: 'center',
+      color: '#000',
     }
   });
 export default Login;

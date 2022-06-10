@@ -93,7 +93,7 @@ class Confirm3 extends Component {
                
                 <Text></Text>
                <InputListe style={styles.input}  label="password" placeholder="password"
-               placeholderTextColor='#9C9B9B' 
+               placeholderTextColor= '#9C9B9B' 
                onChangeText={this.onChangeText} 
                nomState = "password"
                value = {this.state.password}

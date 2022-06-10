@@ -12,7 +12,7 @@ const Home = ({ navigation }) => {
     <View style={styles.container}>
       <ImageBackground source={require('../img/HomeScreenBackground.jpg')} resizeMode="cover" style={styles.image}>
         <Text style= {styles.welcome}>BIENVENUE AUX ELECTIONS DE L’AE</Text>
-        <TouchableOpacity style = {styles.button} onPress={() => navigation.navigate('Vote')}>
+        <TouchableOpacity style = {styles.button} onPress={() => navigation.navigate('confirmVote')}>
           <Text style={{color: 'white' }}>Voter ?</Text>
         </TouchableOpacity>     
       </ImageBackground>

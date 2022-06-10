@@ -12,8 +12,10 @@ import UpdatePassEmail from "../updateEmailAndPass";
 import Confirm3 from "../confirm3";
 import UpdatePassword from "../updatePassword";
 import HomeScreen from "./HomeScreen";
-
-
+import LoadingLogin from "../loadingLogin";
+import AuthScreen from "../loginEmailPassword";
+import ConfirmVote from "../confirmVote";
+import VoteScreen from "./VoteScreen";
 
 
 const LoginToNavigation = () =>{
@@ -21,19 +23,29 @@ const LoginToNavigation = () =>{
     return( 
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name='Login' component={Login} 
+                <Stack.Screen name='auth' component={AuthScreen} 
                     options={{
                         headerShown: false,
                     }} 
                 />
-                
+                 <Stack.Screen name='Login' component={Login} 
+                    options={{
+                        headerShown: false,
+                    }} 
+                />
                 <Stack.Screen name='Navigation' component={Navigation} 
                     options={{
                         headerShown: false,
                     }} 
                 />
+                <Stack.Screen name='confirmVote' component={ConfirmVote} 
+                    options={{
+                        headerShown: false,
+                    }} 
+                />
+                 <Stack.Screen name='Vote' component={VoteScreen} />
+                <Stack.Screen name="LoadingLogin" component = {LoadingLogin}   />
                 <Stack.Screen name="confirm" component = {Confirm}   />
-                <Stack.Screen name="Accueil" component = {HomeScreen}   />
                 <Stack.Screen name="confirm2" component = {Confirm2}   />
                 <Stack.Screen name="updateProfil" component = {UpdatePassEmail}   />
                 <Stack.Screen name="updatePassword" component = {UpdatePassword}   />

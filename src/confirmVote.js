@@ -5,7 +5,7 @@ import InputListe from './inputListe';
 
 
 
-class Login extends Component {
+class ConfirmVote extends Component {
   constructor(props) 
     {
         super(props)
@@ -20,52 +20,58 @@ class Login extends Component {
             
         }
     }
-
+    componentDidMount() {
+        const {cleutilisateur, AllUsers, utilisateur, recuperation} = this.state
+        Firebase.database()
+            .ref("utilisateurs/" +recuperation)
+            .once('value', (querySnapShot) => {
+                let data = querySnapShot.val() ? querySnapShot.val() : {};
+                let AllUsers = {...data};
+                this.setState({
+                    utilisateur:AllUsers, 
+                    cleutilisateur: Object.keys(AllUsers)
+                })
+            })
+          }
+           
+confirmIdentite = ()=> {
+        const {cleutilisateur, utilisateur, recup} = this.state
+        cleutilisateur.map((key) =>(
+           Firebase.auth().currentUser.email == utilisateur[key].email && this.state.matricule ==  utilisateur[key].matricule && this.state.password ==  utilisateur[key].password ? ( 
+           alert("ok"),
+         
+           this.props.navigation.navigate("Vote")    
+        ): (
+            alert('bad')
+            
+            )
+        
+        )) 
+           
+            
+      }
+    
   onChangeText = (nomState, value) => {
     this.setState({
         [nomState]: value
     })
   }
-
-  componentDidMount() {
-    Firebase.database()
-    .ref("utilisateurs")
-    .once('value', (querySnapShot) => {
-        let data = querySnapShot.val() ? querySnapShot.val() : {};
-        let AllUsers = {...data};
-
-        this.setState({
-            utilisateur:AllUsers, 
-            cleutilisateur: Object.keys(AllUsers)
-        })
-    })
-  }
-
- connection = (recuperation, recup) => {
-  const {cleutilisateur, AllUsers, utilisateur} = this.state
-  cleutilisateur.map((key) =>(
-  this.state.matricule == utilisateur[key].matricule && this.state.password == utilisateur[key].password ? (  
-    recuperation = key,
-    this.props.navigation.navigate("Navigation")       
-
-  ): (
-        recup = "message"      
-      )
-  
-  )) 
+ 
 
 
-}
+
+ 
+
 
 
     render() {  
-      const {recuperation, id} = this.state;
+      const {recuperation, id, utilisateur} = this.state;
         return (
           <ScrollView>
             <SafeAreaView style= {styles.container}>
             <View style={styles.header}></View>
             <View style= {styles.login}>
-                <Text style={styles.text}>connexion</Text>
+                <Text style={styles.text}>{utilisateur.nom}</Text>
                 <View style={styles.login2}>
                 
                <InputListe label="matricule" placeholder="matricule"
@@ -84,12 +90,10 @@ class Login extends Component {
                />
                </View>
                <Text></Text>
-                <TouchableOpacity style = {styles.button}  key={recuperation}  onPress={() => this.connection()}>
-                    <Text style={{color: 'white'}}>Connexion</Text>
+                <TouchableOpacity style = {styles.button}    onPress={() => this.confirmIdentite()}>
+                    <Text style={{color: 'white'}}>Continuer</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate("confirm")} style = {styles.change}>
-                <Text style = {{color:"white"}} >mot de passe oublié?</Text>
-                </TouchableOpacity>
+                
                 <Text></Text>
                
                 </View>
@@ -180,4 +184,4 @@ let styles= StyleSheet.create({
       color: '#000',
     }
   });
-export default Login;
+export default ConfirmVote;

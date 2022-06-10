@@ -10,7 +10,8 @@ const CardListe = ({ id, AllListe, cleListe, voter}) =>{
     voter = () => {
         const reference = Firebase.database().ref("vote");
                 const recup = {
-                    cleListe: id
+                    cleListe: id, 
+                    idUsers: Firebase.auth().currentUser.uid
                 }
                 reference
                 .push(recup)

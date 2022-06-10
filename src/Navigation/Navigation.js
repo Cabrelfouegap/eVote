@@ -26,11 +26,10 @@ export default class Navigation extends Component {
   }
   componentDidMount() {
       Firebase.database()
-      .ref("utilisateurs/"+ this.props.route.params.id)
+      .ref("utilisateurs")
       .once('value', (querySnapShot) => {
           let data = querySnapShot.val() ? querySnapShot.val() : {};
           let AllUsers = {...data};
-
           this.setState({
               utilisateurs:AllUsers, 
           })
@@ -41,7 +40,7 @@ export default class Navigation extends Component {
 {
 const {utilisateurs} = this.state
   return (
-        <VoteTabNavigator.Navigator style = {styles.container}
+        <VoteTabNavigator.Navigator style = {styles.container} 
             screenOptions={({ route }) => ({
                 tabBarShowLabel:true,
                 tabBarActiveTintColor: '#0080BB',

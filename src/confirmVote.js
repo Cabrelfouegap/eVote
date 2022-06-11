@@ -1,8 +1,8 @@
 import  {React, Component} from 'react';
-import { TextInput, useState, View, StyleSheet, SafeAreaView, Text, Button, TouchableOpacity,ScrollView } from 'react-native';
+import { TextInput, useState, View, StyleSheet, SafeAreaView, Text, Button, TouchableOpacity,ScrollView, Alert } from 'react-native';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import Firebase from './firebase';
 import InputListe from './inputListe';
-
 
 
 class ConfirmVote extends Component {
@@ -16,8 +16,7 @@ class ConfirmVote extends Component {
             password: '',
             AllUsers: [], 
             recuperation: "", 
-            id: ""
-            
+            id: "",
         }
     }
     componentDidMount() {
@@ -34,13 +33,17 @@ class ConfirmVote extends Component {
             })
           }
            
-confirmIdentite = ()=> {
+  confirmIdentite = ()=> {
         const {cleutilisateur, utilisateur, recup} = this.state
         cleutilisateur.map((key) =>(
            Firebase.auth().currentUser.email == utilisateur[key].email && this.state.matricule ==  utilisateur[key].matricule && this.state.password ==  utilisateur[key].password ? ( 
-           alert("ok"),
-         
-           this.props.navigation.navigate("Vote")    
+            Alert.alert(
+              "Vote enregistrer avec succes",
+              " ",
+              [
+                { text: "Continuer", onPress: () => this.props.navigation.navigate('ListesElection') }
+              ]
+            )  
         ): (
             alert('bad')
             
@@ -58,14 +61,8 @@ confirmIdentite = ()=> {
   }
  
 
-
-
- 
-
-
-
     render() {  
-      const {recuperation, id, utilisateur} = this.state;
+      const {recuperation, id, utilisateur,} = this.state;
         return (
           <ScrollView>
             <SafeAreaView style= {styles.container}>
@@ -97,7 +94,7 @@ confirmIdentite = ()=> {
                 <Text></Text>
                
                 </View>
-            
+
             </SafeAreaView>
           </ScrollView>
         ) 

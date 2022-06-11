@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, Button, TextInput, TouchableOpacity, ScrollView}
 import "firebase/compat/database"; 
 import Firebase from "../firebase";
 import CardListe from "./extern";
+import SwipeButton from 'rn-swipe-button';
 
 
 export default class VoteScreen extends Component{
@@ -44,11 +45,32 @@ export default class VoteScreen extends Component{
                             
                                 cleListe.map((key) => (
                                 
-                                // <View> 
-                                <TouchableOpacity  style={[styles.card, {backgroundColor:liste[key].couleur}]}>
-                                    <CardListe  key={key} AllListe={liste[key]} id={key} style={{backgroundColor: liste[key].couleur}}/>
-                                </TouchableOpacity>
-                                // </View>
+                               <TouchableOpacity style={{backgroundColor: liste[key].couleur, marginBottom:30, borderRadius: 30,}} onPress={() => this.props.navigation.navigate('confirm')}>
+                                   <CardListe  key={key} AllListe={liste[key]} id={key} style={{backgroundColor: liste[key].couleur}}/>
+                                   <SwipeButton
+                                        disabled={false}
+                                        //disable the button by doing true (Optional)
+                                        swipeSuccessThreshold={70}
+                                        height={40}
+                                        //height of the button (Optional)
+                                        width={300}
+                                        //width of the button (Optional)
+                                        title="Aller Vers resultats"
+                                        //Text inside the button (Optional)
+                                        //thumbIconImageSource={thumbIcon}
+                                        //You can also set your own icon for the button (Optional)
+                                        onSwipeSuccess={() => {
+                                            this.props.navigation.navigate('Resultat')
+                                        }}
+                                        //After the completion of swipe (Optional)
+                                        railFillBackgroundColor="background: rgba(223, 223, 223, 0.3);" //(Optional)
+                                        railFillBorderColor="#fff" //(Optional)
+                                        thumbIconBackgroundColor="background: rgba(223, 223, 223, 0.1);" //(Optional)
+                                        thumbIconBorderColor="#fff" //(Optional)
+                                        railBackgroundColor= {liste[key].couleur}//(Optional)
+                                        railBorderColor="#fff" //(Optional)
+                                    /> 
+                               </TouchableOpacity>                                 
 
                                 ))
                             ) : (
@@ -102,9 +124,8 @@ const styles = StyleSheet.create({
         flex: 1,   
     },
     listContainer: {
-      flexDirection: 'row',
+      alignItems: 'center',
       justifyContent: 'center',
-      flexWrap: 'wrap',
     },
     choice: {
       fontWeight: '500',

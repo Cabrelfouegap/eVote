@@ -2,7 +2,9 @@ import React from 'react';
 import { Text, View, StyleSheet, Image, ScrollView, TouchableOpacity,  ImageBackground} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import VoteScreen from './VoteScreen';
-import { NavigationContainer } from '@react-navigation/native';
+import ListesElection from './ListesElection';
+import ResultScreen from './ResultScreen';
+import ConfirmVote from '../confirmVote';
 
 
 //HomeScreen
@@ -12,8 +14,8 @@ const Home = ({ navigation }) => {
     <View style={styles.container}>
       <ImageBackground source={require('../img/HomeScreenBackground.jpg')} resizeMode="cover" style={styles.image}>
         <Text style= {styles.welcome}>BIENVENUE AUX ELECTIONS DE L’AE</Text>
-        <TouchableOpacity style = {styles.button} onPress={() => navigation.navigate('confirmVote')}>
-          <Text style={{color: 'white' }}>Voter ?</Text>
+        <TouchableOpacity style = {styles.button} onPress={() => navigation.navigate('ListesElection')}>
+          <Text style={{color: 'white', alignSelf: 'center',  }}>Demarrer</Text>
         </TouchableOpacity>     
       </ImageBackground>
     </View>
@@ -25,12 +27,13 @@ const Home = ({ navigation }) => {
 const Stack = createStackNavigator();
 const HomeScreen = () => {
   return (
-  
       <Stack.Navigator>
         <Stack.Screen name='Accueil' component={Home} />
+        <Stack.Screen name='ListesElection' component={ListesElection}/>
         <Stack.Screen name='Vote' component={VoteScreen} />
-      </Stack.Navigator> 
-    
+        <Stack.Screen name='Resultat' component={ResultScreen} />
+        <Stack.Screen name='confirm' component={ConfirmVote} />
+      </Stack.Navigator>   
   );
 }
 
@@ -45,6 +48,7 @@ let styles = StyleSheet.create({
       textAlign: 'center',
       marginBottom: 30,
       marginTop: 40,
+      flex:1,
 
       color: "white",
       fontSize: 42,
@@ -76,7 +80,7 @@ let styles = StyleSheet.create({
     },
     button: {
       backgroundColor: 'rgba(80, 191, 105, 1)',
-      width: 100,
+      width: 200,
       height: 48,
       borderRadius: 4,
       textAlign: 'center',
@@ -84,7 +88,8 @@ let styles = StyleSheet.create({
       alignItems: 'center',
       color: '#000',
       marginBottom: '30%',
-      marginLeft: '68%',
+      alignSelf: 'center',
+      marginTop: 170,
     },
 
     image: {

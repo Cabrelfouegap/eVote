@@ -55,13 +55,13 @@ const {utilisateurs} = this.state
                     tabBarIcon: ({tintColor}) => (<Ionicons name={'ios-home'} size={30} color={'red'}/>)
                 }}
             />
-            <VoteTabNavigator.Screen name="Resultat" component={ResultScreen} 
+            {/* <VoteTabNavigator.Screen name="Resultat" component={ResultScreen} 
                 options={{
                     tabBarActiveTintColor: '#0080BB',
                     tabBarInactiveTintColor: '#9C9B9B',
                     tabBarIcon: () => (<Ionicons name={'stats-chart'} size={30}  />)
                 }}
-            />
+            /> */}
             <VoteTabNavigator.Screen name="Profil" component={ProfilScreen} 
                 options={{
                     tabBarActiveTintColor: '#0080BB',

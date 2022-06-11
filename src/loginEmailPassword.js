@@ -1,13 +1,12 @@
 import React, {Component, useState} from "react"
-import {Text, View, StyleSheet,TextInput, Alert, Button, TouchableOpacity, SafeAreaView, ScrollView} from "react-native";
+import {Text, View, StyleSheet,TextInput, Alert, Button, TouchableOpacity, SafeAreaView, ScrollView, Image} from "react-native";
 import Firebase from "./firebase";
 import "firebase/compat/auth"; 
 import InputListe from "./inputListe";
-import Navigation from "./Navigation/Navigation";
+
 
 export default function AuthScreen({navigation}) 
-{
-   
+{  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -26,33 +25,30 @@ export default function AuthScreen({navigation})
   
         return(             
           <ScrollView>
-          <SafeAreaView style= {styles.container}>
-          <View style={styles.header}></View>
-          <View style= {styles.login}>
-              <Text style={styles.text}>connexion</Text>
-             <View style={styles.login2}>
-
-               <TextInput style={styles.input} placeholder= "email"
-              keyboardType="email-address"
-              onChangeText={(email) => setEmail(email)}
-              value={email}
-              autoCapitalize="none"
-              />
-             
-              <TextInput style={styles.input} placeholder= "password"
-               onChangeText={(password) => setPassword(password)}
-               value={password}
-              />
-            <Text></Text>
-            <TouchableOpacity style = {styles.button} onPress={connection}>
-                 <Text style={{color: 'white'}}>Connexion</Text>
-            </TouchableOpacity>  
-            
-             </View>  
-              </View>
-          
-          </SafeAreaView>
-        </ScrollView>
+            <SafeAreaView style= {styles.container}>
+            <View style={styles.header}></View>
+            <View style= {styles.login}>
+              <Image source={require('./img/logo.jpg')} style={{width: 200, height:200, marginTop: 10 }}/>
+              <View style={styles.login2}>
+                  <TextInput style={styles.input} placeholder= "email"
+                  keyboardType="email-address"
+                  onChangeText={(email) => setEmail(email)}
+                  value={email}
+                  autoCapitalize="none"
+                  />
+                
+                <TextInput style={[styles.input, {marginTop: 55}]} placeholder= "password"
+                  onChangeText={(password) => setPassword(password)}
+                  value={password}
+                />
+                <Text></Text>
+                <TouchableOpacity style = {[styles.button, {marginTop: 70}]} onPress={connection}>
+                    <Text style={{color: 'white'}}>Connexion</Text>
+                </TouchableOpacity>  
+              </View>  
+            </View>
+            </SafeAreaView>
+          </ScrollView>
            
         )
     }
@@ -89,7 +85,7 @@ const styles = StyleSheet.create({
         flex: 1
       },
       login: {
-        flex: 8,
+        flex: 1,
         backgroundColor: 'white',
         justifyContent: 'space-around',
         alignItems: 'center',

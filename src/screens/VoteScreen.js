@@ -46,7 +46,7 @@ export default class VoteScreen extends Component{
                                 cleListe.map((key) => (
                                 
                                <TouchableOpacity style={{backgroundColor: liste[key].couleur, marginBottom:30, borderRadius: 30,}} onPress={() => this.props.navigation.navigate('confirm')}>
-                                   <CardListe  key={key} AllListe={liste[key]} id={key} style={{backgroundColor: liste[key].couleur}}/>
+                                   <CardListe  key={key} AllListe={liste[key]} id={key} />
                                    <SwipeButton
                                         disabled={false}
                                         //disable the button by doing true (Optional)

@@ -20,44 +20,44 @@ export default class ListesElection extends Component{
         super(props)
         {
             this.state = {
-                liste: {},  
-                cleListe: []
+                election: {},  
+                cleElection: []
             }
         }
     }
    
     componentDidMount() {
         Firebase.database()
-        .ref("liste")
+        .ref("election")
         .once('value', (querySnapShot) => {
             let data = querySnapShot.val() ? querySnapShot.val() : {};
-            let AllListe = {...data};
+            let AllElection = {...data};
 
             this.setState({
-                liste:AllListe, 
-                cleListe: Object.keys(AllListe)
+                election:AllElection, 
+                cleElection: Object.keys(AllElection)
             })
         })
     }
         
     render(){
-        const {liste, cleListe, AllListe} = this.state
+        const {election, cleElection, AllElection} = this.state
         return(
             <ScrollView style={styles.container}>
                 {/* <View style={styles.header}> */}
-                    <Text style= {styles.choice}>CHOISIR L'ELECTION A PARTICIPER</Text>
+                    <Text style= {styles.choice}>CHOISIR L'ELECTION EN COURS</Text>
                     {/* <Text style= {styles.list}>Listes représentées aux elections</Text> */}
                 {/* </View> */}
                     <View style={styles.listContainer}>
-                        {cleListe.length >0   ? (
+                        {cleElection.length >0   ? (
                             
-                                cleListe.map((key) => (                                
+                                cleElection.map((key) => (                                
                                     <TouchableOpacity  onPress={() => this.props.navigation.navigate('Vote')}>
-                                      <CardElection  key={key} AllListe={liste[key]} id={key} style={{backgroundColor: liste[key].couleur}}/>
+                                      <CardElection  key={key} AllElection={election[key]} id={key} />
                                     </TouchableOpacity>                                                                 
                                 ))
                             ) : (
-                                <Text style= {[styles.list, {Color: 'red', fontSize: 18}]}>Aucune liste !</Text>          
+                                <Text style= {[styles.list, {Color: 'red', fontSize: 18}]}>Aucune election !</Text>          
                             )
                         }       
                     </View>

@@ -5,19 +5,19 @@ import "firebase/compat/auth";
 import InputListe from "./inputListe";
 
 
-export default function AuthScreen({navigation}) 
+export default function PassOublie({navigation}) 
 {  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const connection = () => {
+  const forgotPass = () => {
     if (!email) {
       Alert.alert('Entrer votre email.');
-    }else if(!password) {
-      Alert.alert('Entrer votre mot de passe.');
+
     } else{
-      Firebase.auth().signInWithEmailAndPassword(email, password)
-      navigation.navigate("LoadingLogin")
+      Firebase.auth().sendPasswordResetEmail(email)
+      Alert.alert("un mail vous ait été envoyé")
+      navigation.navigate("auth")
     }
     
   };
@@ -30,6 +30,8 @@ export default function AuthScreen({navigation})
             <View style= {styles.login}>
               <Image source={require('./img/logo.jpg')} style={{width: 200, height:200, marginTop:0 }}/>
               <View style={styles.login2}>
+              <Text style={styles.text}>Inscrivez votre email</Text>
+
                   <TextInput style={styles.input} placeholder= "email"
                   keyboardType="email-address"
                   onChangeText={(email) => setEmail(email)}
@@ -37,18 +39,11 @@ export default function AuthScreen({navigation})
                   autoCapitalize="none"
                   />
                 
-                <TextInput style={[styles.input, {marginTop:5}]} placeholder= "password"
-                  onChangeText={(password) => setPassword(password)}
-                  value={password}
-                  secureTextEntry={true}
-                />
                 <Text></Text>
-                <TouchableOpacity style = {[styles.button, {marginTop: 0}]} onPress={connection}>
-                    <Text style={{color: 'white'}}>Connexion</Text>
+                <TouchableOpacity style = {[styles.button, {marginTop: 0}]} onPress={forgotPass}>
+                    <Text style={{color: 'white'}}>Continuer</Text>
                 </TouchableOpacity>  
-                <TouchableOpacity style = {[styles.button, {marginTop:0}]} onPress={()=>navigation.navigate("passOublie")}>
-                    <Text style={{color: 'white'}}>mot de passe oublié</Text>
-                </TouchableOpacity>  
+               
               </View>  
             </View>
             </SafeAreaView>

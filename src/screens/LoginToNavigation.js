@@ -16,6 +16,7 @@ import LoadingLogin from "../loadingLogin";
 import AuthScreen from "../loginEmailPassword";
 import ConfirmVote from "../confirmVote";
 import VoteScreen from "./VoteScreen";
+import PassOublie from "../motDePassOublie";
 
 
 const LoginToNavigation = () =>{
@@ -29,6 +30,11 @@ const LoginToNavigation = () =>{
                     }} 
                 />
                  <Stack.Screen name='Login' component={Login} 
+                    options={{
+                        headerShown: false,
+                    }} 
+                />
+                <Stack.Screen name='passOublie' component={PassOublie} 
                     options={{
                         headerShown: false,
                     }} 

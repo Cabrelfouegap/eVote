@@ -16,13 +16,14 @@ class ConfirmVote extends Component {
             password: '',
             AllUsers: [], 
             recuperation: "", 
+            recup2:"", 
             id: "",
         }
     }
     componentDidMount() {
         const {cleutilisateur, AllUsers, utilisateur, recuperation} = this.state
         Firebase.database()
-            .ref("utilisateurs/" +recuperation)
+            .ref("utilisateurs/"+recuperation)
             .once('value', (querySnapShot) => {
                 let data = querySnapShot.val() ? querySnapShot.val() : {};
                 let AllUsers = {...data};
@@ -31,22 +32,37 @@ class ConfirmVote extends Component {
                     cleutilisateur: Object.keys(AllUsers)
                 })
             })
-          }
+    
+        }
            
-  confirmIdentite = ()=> {
-        const {cleutilisateur, utilisateur, recup} = this.state
+        confirm = () => {
+          const reference = Firebase.database().ref("vote");
+                  const recup = {
+                      idUsers: Firebase.auth().currentUser.uid 
+                  }
+                  reference
+                  .push(recup)
+                  .then((data) => {
+                  })
+                  .catch((error) => {
+                      console.log("Error: ", error);
+                  })       
+      }  
+  confirmIdentite = (alc)=> {
+        const {cleutilisateur, utilisateur} = this.state
         cleutilisateur.map((key) =>(
            Firebase.auth().currentUser.email == utilisateur[key].email && this.state.matricule ==  utilisateur[key].matricule && this.state.password ==  utilisateur[key].password ? ( 
+            this.confirm(),  
             Alert.alert(
               "Vote enregistrer avec succes",
               " ",
               [
                 { text: "Continuer", onPress: () => this.props.navigation.navigate('ListesElection') }
               ]
-            )  
-        ): (
-            alert('bad')
+            ) 
             
+        ): (
+                  alc="mmm"            
             )
         
         )) 
@@ -68,7 +84,7 @@ class ConfirmVote extends Component {
             <SafeAreaView style= {styles.container}>
             <View style={styles.header}></View>
             <View style= {styles.login}>
-                <Text style={styles.text}>{utilisateur.nom}</Text>
+                <Text style={styles.text}>Confirmer votre identité</Text>
                 <View style={styles.login2}>
                 
                <InputListe label="matricule" placeholder="matricule"

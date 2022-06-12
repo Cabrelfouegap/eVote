@@ -7,26 +7,99 @@ import VoteScreen from "./VoteScreen";
 import "firebase/compat/database"; 
 // import SwipeButton from 'rn-swipe-button';
 
-const CardListe = ({ id, AllListe, cleListe, voter, navigation}) =>{
+ 
 
-    voter = () => {
-        const reference = Firebase.database().ref("vote");
-                const recup = {
-                    cleListe: id, 
-                    idUsers: Firebase.auth().currentUser.uid
-                }
-                reference
-                .push(recup)
-                .then((data) => {
-                    alert("Votre choix a été enregistré!!!");
-                })
-                .catch((error) => {
-                    console.log("Error: ", error);
-                })       
+
+const CardListe = ({ id, AllListe, cleListe, voter, navigation, confirm}) =>{
+     
+    
+    confirm = ()=> {
+
+        const listeVerte = Firebase.database().ref("listeVerte"); 
+        const listeJaune = Firebase.database().ref("listeJaune"); 
+        const listeRouge = Firebase.database().ref("listeRouge");
+        const listeBleu = Firebase.database().ref("listeBleu");
+        let cle = id; 
+        const comparaison = Firebase.database().ref("vote/".cle) 
+           
+             if(id=="-N3nM0q-V1EyVOJnTHN0")
+            {   
+               const listeGreen = {
+                    idListe:id  
+            }
+            listeVerte
+            .push(listeGreen)
+            .then((data) => {
+                
+            })
+            .catch((error) => {
+                console.log("Error: ", error);
+            })  
+        }
+        else if(id=="-N3nM9JPOsPU8CbMIBqJ")
+        {
+            const listeBlue = {
+                idListe:id  
+        }
+        listeBleu
+        .push(listeBlue)
+        .then((data) => {
+            
+        })
+        .catch((error) => {
+            console.log("Error: ", error);
+        })  
+        }
+        else if(id=="-N3nMJoa28H-aoNVQxry")
+        {
+            const listeRed = {
+                idListe:id  
+        }
+        listeRouge
+        .push(listeRed)
+        .then((data) => {
+            
+        })
+        .catch((error) => {
+            console.log("Error: ", error);
+        })  
+        }
+
+        else if(id=="-N3nMJoa28H-aoNVQxry")
+        {
+            const listeRed = {
+                idListe:id  
+        }
+        listeRouge
+        .push(listeRed)
+        .then((data) => {
+            
+        })
+        .catch((error) => {
+            console.log("Error: ", error);
+        })  
+        }
+        else if(id=="-N3nMTNsHrzLKawhWDG0")
+        {
+            const listeYellow = {
+                idListe:id  
+        }
+        listeJaune
+        .push(listeYellow)
+        .then((data) => {
+            
+        })
+        .catch((error) => {
+            console.log("Error: ", error);
+        })  
+        }
+        
     }
+   
+   
     return(
         
-        <TouchableOpacity  style={styles.container} onPress={voter}>
+        <TouchableOpacity  style={styles.container} onPress={()=>confirm()}>
             <View style={{backgroundColor: AllListe.couleur, width:200, height: 30,}}>
                 <Text style={styles.commentaire}>{/*Nom de la liste:*/} {AllListe.liste}</Text>
                 {/* <Text style={styles.commentaire}>Couleur: {AllListe.couleur}</Text> */}

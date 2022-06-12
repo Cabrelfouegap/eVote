@@ -7,24 +7,24 @@ import VoteScreen from "./VoteScreen";
 import "firebase/compat/database"; 
 import SwipeButton from 'rn-swipe-button';
 
-const CardElection = ({ id, AllListe, cleListe, voter}) =>{
-
+const CardElectionResult = ({ id, AllElection, cleElection, voter}) =>{
+    
     // voter = ({navigation}) => {
     
     //     navigation.navigate('Vote')        
     // }
     return(
         
-        <View  style={[styles.container, {backgroundColor: AllListe.couleur}]}>
+        <View  style={[styles.container, {backgroundColor:"rgba(80,191,105,1)"}]}>
             {/* <View style={{backgroundColor: AllListe.couleur}}> */}
-                <Text style={styles.commentaire}>{/*Nom de la liste:*/} {AllListe.liste}</Text>
+                <Text style={styles.commentaire}>{/*Nom de la liste:*/} {AllElection.nomElection}</Text>
                 {/* <Text style={styles.commentaire}>Couleur: {AllListe.couleur}</Text> */}
             {/* </View>      */}
         </View> 
     )
     
 }
-export default CardElection; 
+export default CardElectionResult; 
 
 const styles = StyleSheet.create({
     container: {    
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
         borderRadius: 5, 
         marginBottom: 20, 
         shadowColor: "#000", 
+        
     }, 
     nom: {
         fontWeight: "bold", 
@@ -43,7 +44,8 @@ const styles = StyleSheet.create({
     commentaire: {
       fontSize: 15, 
       color: "rgba(255,255,255,1)",
-      alignSelf: 'center'
+      alignSelf: 'center', 
+      fontSize: 30
     }, 
     icon: {
         flexDirection:"row" ,
